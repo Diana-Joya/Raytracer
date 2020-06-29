@@ -12,7 +12,7 @@ This repository contains the implementation files of a minimalist raytracer buil
 **Some future work for this raytracer includes:** adding shadowing features, mirrored surfaces, other scene object shapes (besides triangles and spheres), and additional lighting features. 
 
 ## Linear Algebra Contributions
-This project builds on a previous linear algebra project I built in which I implemented vector and matrix algebra operations in C++. The following linear algebra contributions were all performed by me using skeleton code provided by Dr. Kevin Wortman. Code for all math implementations can be found in the gfxalgebra.hpp file, which contains basic addition, subtraction, multiplication by scalar, and division by scalar operations for both vector and matrix classes as well as:
+This project builds on a previous linear algebra project I built in which I implemented vector and matrix algebra operations in C++. The following linear algebra contributions were all performed by me using skeleton code provided by Dr. Kevin Wortman. Code for all math implementations can be found in the gfxalgebra.hpp file, which contains my implementation of basic addition, subtraction, multiplication by scalar, and division by scalar operations for both vector and matrix classes as well as:
 
 *Additional vector functions:* Dot and cross products, vector equality check functions, resizing operations (grow/shrink/subvector conversion), unit vector check and normalization, vector conversion to matrix row/column functions.
 
@@ -172,12 +172,12 @@ where  *L*, Pixel color
 See blinn_phong_shader::shade() for c++ implementation.
 
 ### Additional Contributions
-Some additional contributions include:
+Some of my additional contributions include:
 - implementation of function that calculates u, v viewport coordinates (See  viewport::uv())
 - implementation of camera constructor that computes the basis in terms of a given view-direction and up vector (See camera::camera())
 - implementation of helper function that traces a ray to find the closest intersecting scene object (See scene::intersect())
 
-### Final Results
+## Final Results
 Scenes with ortographic projection and flat shading:
 
 Scenes with ortographic projection and Blinn-Phong shading:
@@ -187,3 +187,7 @@ Scenes with perspective projection and flat shading:
 Scenes with perspective projection and Blinn-Phong shading:
 
 Teapot scene:
+
+## Usage
+- Run `make` to raytrace the fast scenes (all except *teatime.png*)
+- Run `make all` to raytrace all the scenes (including *teatime.png*)
