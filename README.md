@@ -1,8 +1,10 @@
 # Raytracer
 Minimalist Raytracer in C++ that supports the fundamental raytracing algorithm, orthographic and perspective projection, flat and Blinn-Phong shading, point lights lighting, and scene objects comprised of sphere and triangle primitives. 
 
+
 ### Note: 
 Due to the group project nature of this project, **this README file highlights only my own contributions to the project**. Skeleton code was provided by Dr. Kevin Wortman during a Principles of Computer Graphics class and the project was implemented using a Linux environment. 
+
 
 ## About
 This repository contains the implementation files of a minimalist raytracer built using C++. 
@@ -10,6 +12,7 @@ This repository contains the implementation files of a minimalist raytracer buil
 **This raytracer supports:** fundamental raytracing algorithm, orthographic and perspective projections, flat and Blinn-Phong shaders, point lights only lighting, and the rendering of basic scene objects comprised of spheres and triangles (including a tea pot scene). 
 
 **Some future work for this raytracer includes:** adding shadowing features, mirrored surfaces, other scene object shapes (besides triangles and spheres), and additional lighting features. 
+
 
 ## Linear Algebra Contributions
 This project builds on a previous linear algebra project I built in which I implemented vector and matrix algebra operations in C++. The following linear algebra contributions were all performed by me using skeleton code provided by Dr. Kevin Wortman. 
@@ -22,8 +25,10 @@ Code for all math implementations can be found in the gfxalgebra.hpp file, which
 
 **Additional linear algebra functions:** Finding the determinant of a matrix, solving a linear system, finding identity matrix, and matrix transpose.
 
+
 ## The Raytracer
 All of my contributions for this raytracer can be found in the gfxraytrace.hpp file in this repository, and can be broken down as follows:
+
 
 ### The Basic Raytracer Algorithm:
 The structure of this basic ray tracing program follows the basic raytracing approach:
@@ -62,8 +67,10 @@ for (size_t y = 0; y < h; ++y) {
   }
 ```
 
+
 ### Ray-Object Intersection:
 In order for the raytracer to find the ray-object intersection required to calculate what color each pixel must be shaded as, the program follows the approach:
+
 
 #### For Ray-Spehere Intersections:
 Intersection points occur when points on the raysatisfy the implicit equation which can be solved using a quadratic equation approach.
@@ -82,6 +89,7 @@ where:
 
     R, the radius of the sphere
 
+
 This solution can be simplified by calculating the discriminant (B^2 - 4AC) where: 
 
     A = d^2 
@@ -96,12 +104,15 @@ Note that by calculating the discriminant we can find the following:
 - if the discriminant is positive: there are two solutions (one where the ray enters the sphere and one where it leaves)
 - if the discriminant is zero: the ray grazes the sphere (touches it at exactly one point)
 
+
 For the c++ implementation see: scene_sphere::intersect()
+
 
 #### For Ray-Triangle Intersections:
 We use a barycentric coordinates approach and matrix algebra to solve a linear system that solves the equation:
 
 ![Image of ray-triangle equation](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Equations/ray-triangle%20intersection.JPG)
+
 
 where:
 
@@ -113,14 +124,20 @@ where:
 
     β, γ, t, unknowns we solve for to calculate intersection. 
 
+
 In this implementation I use Cramer's rule to solve for β, γ, t as follows:
 ![Image of cramer's rule equation](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Equations/Cramers%20rule.JPG)
+
+
 The intersection is inside the triangle if and only if β>0, γ>0, and β+γ<1.
+
 
 For the c++ implementation see: scene_triangle::intersect()
 
+
 ### Perspective:
 This raytracer supports the rendering of scenes using orthographic and perspective projection.
+
 
 #### Ortographic Projection
 Ortographic view in this raytracer follows the approach:
@@ -132,6 +149,7 @@ the view direction -w
 **Set the ray origin following:**
 
 *uv* coordinated of viewport (pixel's positions on the image plane, measured respect to origin e and basis {u,v}
+
 Find the ray origin using the equation e + *u*u + *v*v
 
 
@@ -144,6 +162,7 @@ I implemented this idea as follows: (see: orthographic_projection::compute_view_
   return view_ray(origin, -c.w());
 ```
 
+
 #### Perspective Projection
 Perspective view in this raytracer follows the approach:
 
@@ -152,6 +171,7 @@ Perspective view in this raytracer follows the approach:
 *uv* coordinated of viewport (pixel's positions on the image plane), w the image plane normal, image plane positioned at some distance *d* in front of the origin (image plane distance or focal length), so the direction is defined by the viewpoint and the position of the pixel in the image plane.
 
 Find the ray direction using the equation -*d*w + *u*u + *v*v
+
 
 **Set the ray origin following:**
 
@@ -167,18 +187,22 @@ I implemented this idea as follows: (see: perspective_projection::compute_view_r
   return view_ray(c.eye(), direction);
 ```
 
+
 ### Shading
 This raytracer supports the rendering of scenes using flat and Blinn-Phong shading.
+
 
 #### Flat Shading
 Flat shading is implemented as the simplest form of shading, simply returning the color the pixel should be shaded as at the intersection. 
 
 See flat_shader::shade() for c++ implementation.
 
+
 #### Blinn-Phong Shading
 Follows the simple model for specular highlights that uses the Phong reflection model as modified by Jim Blinn:
 
 ![Image of blinn-phong equation](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Equations/BlinnPhong.JPG)
+
 where:
 
     L, Pixel color
@@ -195,7 +219,9 @@ where:
 
      ks, specular coefficient (specular color of the surface)
        
+
 See blinn_phong_shader::shade() for c++ implementation.
+
 
 ### Additional Contributions
 Some of my additional contributions include:
@@ -203,20 +229,39 @@ Some of my additional contributions include:
 - implementation of camera constructor that computes the basis in terms of a given view-direction and up vector (See camera::camera())
 - implementation of helper function that traces a ray to find the closest intersecting scene object (See scene::intersect())
 
+
 ## Final Results
-Scenes with ortographic projection and flat shading:
-![Image of sphere-ortho-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_ortho_flat.png)
+**Scenes with ortographic projection and flat shading:**
+
+
 ![Image of tri-ortho-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_ortho_flat.png)
-Scenes with ortographic projection and Blinn-Phong shading:
-![Image of sphere-ortho-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_ortho_phong.png)
+![Image of sphere-ortho-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_ortho_flat.png)
+
+
+**Scenes with ortographic projection and Blinn-Phong shading:**
+
+
 ![Image of tri-ortho-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_ortho_phong.png)
-Scenes with perspective projection and flat shading:
-![Image of sphere-pers-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_persp_flat.png)
+![Image of sphere-ortho-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_ortho_phong.png)
+
+
+**Scenes with perspective projection and flat shading:**
+
+
 ![Image of tri-pers-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_persp_flat.png)
-Scenes with perspective projection and Blinn-Phong shading:
-![Image of sphere-pers-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_persp_phong.png)
+![Image of sphere-pers-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_persp_flat.png)
+
+
+**Scenes with perspective projection and Blinn-Phong shading:**
+
+
 ![Image of tri-pers-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_persp_phong.png)
-Teapot scene:
+![Image of sphere-pers-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_persp_phong.png)
+
+
+**Teapot scene:**
+
+
 ![Image of teatime schene](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/teatime.png)
 
 ## Usage
