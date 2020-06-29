@@ -91,7 +91,7 @@ The intersection is inside the triangle if and only if β>0, γ>0, and β+γ<1.
 For the c++ implementation see: scene_triangle::intersect()
 
 ### Perspective:
-This raytracing supports the rendering of scenes using orthographic and perspective projection.
+This raytracer supports the rendering of scenes using orthographic and perspective projection.
 
 #### Ortographic Projection
 Ortographic view in this raytracer follows the approach:
@@ -130,3 +130,40 @@ I implemented this idea as follows: (see: perspective_projection::compute_view_r
   // Set the ray origin and direction
   return view_ray(c.eye(), direction);
 ```
+
+### Shading
+This raytracer supports the rendering of scenes using flat and Blinn-Phong shading.
+
+#### Flat Shading
+Flat shading is implemented as the simplest form of shading, simply returning the color the pixel should be shaded as at the intersection. 
+See flat_shader::shade() for c++ implementation.
+
+#### Blinn-Phong Shading
+Follows the simple model for specular highlights that uses the Phong reflection model as modified by Jim Blinn:
+[]
+where  *L*, Pixel color
+       *kd*, diffuse coefficient (surface color)
+       *I*, intensity of the light source
+       n and l, unit vectors
+       h, half vector
+       p, Phong exponent that controls the apparent shininess of the surface
+       *ks*, specular coefficient (specular color of the surface)
+       
+See blinn_phong_shader::shade() for c++ implementation.
+
+### Additional Contributions
+Some additional contributions include:
+- implementation of function that calculates u, v viewport coordinates (See  viewport::uv())
+- implementation of camera constructor that computes the basis in terms of a given view-direction and up vector (See camera::camera())
+- implementation of helper function that traces a ray to find the closest intersecting scene object (See scene::intersect())
+
+### Final Results
+Scenes with ortographic projection and flat shading:
+
+Scenes with ortographic projection and Blinn-Phong shading:
+
+Scenes with perspective projection and flat shading:
+
+Scenes with perspective projection and Blinn-Phong shading:
+
+Teapot scene:
