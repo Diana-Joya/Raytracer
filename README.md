@@ -101,7 +101,7 @@ For the c++ implementation see: scene_sphere::intersect()
 #### For Ray-Triangle Intersections:
 We use a barycentric coordinates approach and matrix algebra to solve a linear system that solves the equation:
 
-[]
+![Image of ray-triangle equation](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Equations/ray-triangle%20intersection.JPG)
 
 where:
 
@@ -112,7 +112,9 @@ where:
     a,b,c, the triangle vertices
 
     β, γ, t, unknowns we solve for to calculate intersection. 
-      
+
+In this implementation I use Cramer's rule to solve for β, γ, t as follows:
+![Image of cramer's rule equation](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Equations/Cramers%20rule.JPG)
 The intersection is inside the triangle if and only if β>0, γ>0, and β+γ<1.
 
 For the c++ implementation see: scene_triangle::intersect()
@@ -176,7 +178,7 @@ See flat_shader::shade() for c++ implementation.
 #### Blinn-Phong Shading
 Follows the simple model for specular highlights that uses the Phong reflection model as modified by Jim Blinn:
 
-[]
+![Image of blinn-phong equation](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Equations/BlinnPhong.JPG)
 where:
 
     L, Pixel color
@@ -203,14 +205,19 @@ Some of my additional contributions include:
 
 ## Final Results
 Scenes with ortographic projection and flat shading:
-
+![Image of sphere-ortho-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_ortho_flat.png)
+![Image of tri-ortho-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_ortho_flat.png)
 Scenes with ortographic projection and Blinn-Phong shading:
-
+![Image of sphere-ortho-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_ortho_phong.png)
+![Image of tri-ortho-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_ortho_phong.png)
 Scenes with perspective projection and flat shading:
-
+![Image of sphere-pers-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_persp_flat.png)
+![Image of tri-pers-flat](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_persp_flat.png)
 Scenes with perspective projection and Blinn-Phong shading:
-
+![Image of sphere-pers-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_2spheres_persp_phong.png)
+![Image of tri-pers-blinnphong](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/scene_gtri_persp_phong.png)
 Teapot scene:
+![Image of teatime schene](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Scenes/teatime.png)
 
 ## Usage
 - Run `make` to raytrace the fast scenes (all except *teatime.png*)
