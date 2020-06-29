@@ -65,20 +65,28 @@ In order for the raytracer to find the ray-object intersection required to calcu
 
 #### For Ray-Spehere Intersections:
 Intersection points occur when points on the raysatisfy the implicit equation which can be solved using a quadratic equation approach.
+
 []
-where *t*, the intersection
+
+where:
+
+    *t*, the intersection
+
       d, the view direction
+      
       e, the origin
+      
       c, the center of the sphere
+      
       R, the radius of the sphere
 
 This solution can be simplified by calculating the discriminant (B^2 - 4AC) where: 
 
-*A* = d^2 
+    *A* = d^2 
 
-*B* = d * (e-c)
+    *B* = d * (e-c)
 
-*C* = (e-c)^2 - R^2
+    *C* = (e-c)^2 - R^2
 
 
 Note that by calculating the discriminant we can find the following:
@@ -90,8 +98,12 @@ For the c++ implementation see: scene_sphere::intersect()
 
 #### For Ray-Triangle Intersections:
 We use a barycentric coordinates approach and matrix algebra to solve a linear system that solves the equation:
+
 []
-where d, the view direction
+
+where:
+
+      d, the view direction
 
       e, the origin
       
@@ -110,11 +122,14 @@ This raytracer supports the rendering of scenes using orthographic and perspecti
 Ortographic view in this raytracer follows the approach:
 
 **Set the ray direction following:**
+
 the view direction -w
 
 **Set the ray origin following:**
+
 *uv* coordinated of viewport (pixel's positions on the image plane, measured respect to origin e and basis {u,v}
 Find the ray origin using the equation e + *u*u + *v*v
+
 
 I implemented this idea as follows: (see: orthographic_projection::compute_view_ray() in gfxraytrace.hpp)
 
@@ -129,12 +144,15 @@ I implemented this idea as follows: (see: orthographic_projection::compute_view_
 Perspective view in this raytracer follows the approach:
 
 **Set the ray direction following:**
+
 *uv* coordinated of viewport (pixel's positions on the image plane), w the image plane normal, image plane positioned at some distance *d* in front of the origin (image plane distance or focal length), so the direction is defined by the viewpoint and the position of the pixel in the image plane.
 
 Find the ray direction using the equation -*d*w + *u*u + *v*v
 
 **Set the ray origin following:**
+
 For perspective view all rays have origin at the viewpoint e. 
+
 
 I implemented this idea as follows: (see: perspective_projection::compute_view_ray() in gfxraytrace.hpp)
 
@@ -150,12 +168,16 @@ This raytracer supports the rendering of scenes using flat and Blinn-Phong shadi
 
 #### Flat Shading
 Flat shading is implemented as the simplest form of shading, simply returning the color the pixel should be shaded as at the intersection. 
+
 See flat_shader::shade() for c++ implementation.
 
 #### Blinn-Phong Shading
 Follows the simple model for specular highlights that uses the Phong reflection model as modified by Jim Blinn:
+
 []
-where  *L*, Pixel color
+where:
+
+        *L*, Pixel color
 
        *kd*, diffuse coefficient (surface color)
        
