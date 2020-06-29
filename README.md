@@ -6,13 +6,18 @@ Due to the group project nature of this project, **this README file highlights o
 
 ## About
 This repository contains the implementation files of a minimalist raytracer built using C++. 
+
 **This raytracer supports:** fundamental raytracing algorithm, orthographic and perspective projections, flat and Blinn-Phong shaders, point lights only lighting, and the rendering of basic scene objects comprised of spheres and triangles (including a tea pot scene). 
+
 **Some future work for this raytracer includes:** adding shadowing features, mirrored surfaces, other scene object shapes (besides triangles and spheres), and additional lighting features. 
 
 ## Linear Algebra Contributions
 This project builds on a previous linear algebra project I built in which I implemented vector and matrix algebra operations in C++. The following linear algebra contributions were all performed by me using skeleton code provided by Dr. Kevin Wortman. Code for all math implementations can be found in the gfxalgebra.hpp file, which contains basic addition, subtraction, multiplication by scalar, and division by scalar operations for both vector and matrix classes as well as:
+
 *Additional vector functions:* Dot and cross products, vector equality check functions, resizing operations (grow/shrink/subvector conversion), unit vector check and normalization, vector conversion to matrix row/column functions.
+
 *Additional matrix functions:* matrix by matrix multiplication, matrix by scalar multiplication, matrix equality checks, matrix conversion functions (column n as a width-1 matrix, column n to vector, row n as a height-1 matrix, row n to vector, and submatrix).
+
 *Additional linear algebra functions:* Finding the determinant of a matrix, solving a linear system, finding identity matrix, and matrix transpose.
 
 ## The Raytracer
@@ -68,9 +73,13 @@ where *t*, the intersection
       R, the radius of the sphere
 
 This solution can be simplified by calculating the discriminant (B^2 - 4AC) where: 
+
 *A* = d^2 
+
 *B* = d * (e-c)
+
 *C* = (e-c)^2 - R^2
+
 
 Note that by calculating the discriminant we can find the following:
 - if the discriminant is negative: the line and the sphere do not intersect
@@ -83,9 +92,13 @@ For the c++ implementation see: scene_sphere::intersect()
 We use a barycentric coordinates approach and matrix algebra to solve a linear system that solves the equation:
 []
 where d, the view direction
+
       e, the origin
+      
       a,b,c, the triangle vertices
+      
       β, γ, *t*, unknowns we solve for to calculate intersection. 
+      
 The intersection is inside the triangle if and only if β>0, γ>0, and β+γ<1.
 
 For the c++ implementation see: scene_triangle::intersect()
@@ -96,10 +109,10 @@ This raytracer supports the rendering of scenes using orthographic and perspecti
 #### Ortographic Projection
 Ortographic view in this raytracer follows the approach:
 
-Set the ray direction following:
+**Set the ray direction following:**
 the view direction -w
 
-Set the ray origin following:
+**Set the ray origin following:**
 *uv* coordinated of viewport (pixel's positions on the image plane, measured respect to origin e and basis {u,v}
 Find the ray origin using the equation e + *u*u + *v*v
 
@@ -115,11 +128,12 @@ I implemented this idea as follows: (see: orthographic_projection::compute_view_
 #### Perspective Projection
 Perspective view in this raytracer follows the approach:
 
-Set the ray direction following:
+**Set the ray direction following:**
 *uv* coordinated of viewport (pixel's positions on the image plane), w the image plane normal, image plane positioned at some distance *d* in front of the origin (image plane distance or focal length), so the direction is defined by the viewpoint and the position of the pixel in the image plane.
+
 Find the ray direction using the equation -*d*w + *u*u + *v*v
 
-Set the ray origin following:
+**Set the ray origin following:**
 For perspective view all rays have origin at the viewpoint e. 
 
 I implemented this idea as follows: (see: perspective_projection::compute_view_ray() in gfxraytrace.hpp)
@@ -142,11 +156,17 @@ See flat_shader::shade() for c++ implementation.
 Follows the simple model for specular highlights that uses the Phong reflection model as modified by Jim Blinn:
 []
 where  *L*, Pixel color
+
        *kd*, diffuse coefficient (surface color)
+       
        *I*, intensity of the light source
+       
        n and l, unit vectors
+       
        h, half vector
+       
        p, Phong exponent that controls the apparent shininess of the surface
+       
        *ks*, specular coefficient (specular color of the surface)
        
 See blinn_phong_shader::shade() for c++ implementation.
