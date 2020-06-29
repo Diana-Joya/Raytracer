@@ -68,7 +68,7 @@ In order for the raytracer to find the ray-object intersection required to calcu
 #### For Ray-Spehere Intersections:
 Intersection points occur when points on the raysatisfy the implicit equation which can be solved using a quadratic equation approach.
 
-[]
+![Image of ray-sphere equation](https://github.com/Diana-Joya/Raytracer/blob/master/Images/Equations/ray-sphere%20intersection.JPG)
 
 where:
 
