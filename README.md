@@ -72,23 +72,23 @@ Intersection points occur when points on the raysatisfy the implicit equation wh
 
 where:
 
-  *t*, the intersection
+    t, the intersection
 
-  d, the view direction
+    d, the view direction
 
-  e, the origin
+    e, the origin
 
-  c, the center of the sphere
+    c, the center of the sphere
 
-  R, the radius of the sphere
+    R, the radius of the sphere
 
 This solution can be simplified by calculating the discriminant (B^2 - 4AC) where: 
 
-  *A* = d^2 
+    A = d^2 
 
-  *B* = d * (e-c)
+    B = d * (e-c)
 
-  *C* = (e-c)^2 - R^2
+    C = (e-c)^2 - R^2
 
 
 Note that by calculating the discriminant we can find the following:
@@ -105,13 +105,13 @@ We use a barycentric coordinates approach and matrix algebra to solve a linear s
 
 where:
 
-  d, the view direction
+    d, the view direction
 
-  e, the origin
+    e, the origin
 
-  a,b,c, the triangle vertices
+    a,b,c, the triangle vertices
 
-  β, γ, *t*, unknowns we solve for to calculate intersection. 
+    β, γ, t, unknowns we solve for to calculate intersection. 
       
 The intersection is inside the triangle if and only if β>0, γ>0, and β+γ<1.
 
@@ -179,19 +179,19 @@ Follows the simple model for specular highlights that uses the Phong reflection 
 []
 where:
 
-  *L*, Pixel color
+    L, Pixel color
 
-   *kd*, diffuse coefficient (surface color)
+     kd, diffuse coefficient (surface color)
 
-   *I*, intensity of the light source
+     I, intensity of the light source
 
-   n and l, unit vectors
+     n and l, unit vectors
 
-   h, half vector
+     h, half vector
 
-   p, Phong exponent that controls the apparent shininess of the surface
+     p, Phong exponent that controls the apparent shininess of the surface
 
-   *ks*, specular coefficient (specular color of the surface)
+     ks, specular coefficient (specular color of the surface)
        
 See blinn_phong_shader::shade() for c++ implementation.
 
