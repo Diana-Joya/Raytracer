@@ -12,13 +12,15 @@ This repository contains the implementation files of a minimalist raytracer buil
 **Some future work for this raytracer includes:** adding shadowing features, mirrored surfaces, other scene object shapes (besides triangles and spheres), and additional lighting features. 
 
 ## Linear Algebra Contributions
-This project builds on a previous linear algebra project I built in which I implemented vector and matrix algebra operations in C++. The following linear algebra contributions were all performed by me using skeleton code provided by Dr. Kevin Wortman. Code for all math implementations can be found in the gfxalgebra.hpp file, which contains my implementation of basic addition, subtraction, multiplication by scalar, and division by scalar operations for both vector and matrix classes as well as:
+This project builds on a previous linear algebra project I built in which I implemented vector and matrix algebra operations in C++. The following linear algebra contributions were all performed by me using skeleton code provided by Dr. Kevin Wortman. 
 
-*Additional vector functions:* Dot and cross products, vector equality check functions, resizing operations (grow/shrink/subvector conversion), unit vector check and normalization, vector conversion to matrix row/column functions.
+Code for all math implementations can be found in the gfxalgebra.hpp file, which contains my implementation of basic addition, subtraction, multiplication by scalar, and division by scalar operations for both vector and matrix classes as well as:
 
-*Additional matrix functions:* matrix by matrix multiplication, matrix by scalar multiplication, matrix equality checks, matrix conversion functions (column n as a width-1 matrix, column n to vector, row n as a height-1 matrix, row n to vector, and submatrix).
+**Additional vector functions:** Dot and cross products, vector equality check functions, resizing operations (grow/shrink/subvector conversion), unit vector check and normalization, vector conversion to matrix row/column functions.
 
-*Additional linear algebra functions:* Finding the determinant of a matrix, solving a linear system, finding identity matrix, and matrix transpose.
+**Additional matrix functions:** matrix by matrix multiplication, matrix by scalar multiplication, matrix equality checks, matrix conversion functions (column n as a width-1 matrix, column n to vector, row n as a height-1 matrix, row n to vector, and submatrix).
+
+**Additional linear algebra functions:** Finding the determinant of a matrix, solving a linear system, finding identity matrix, and matrix transpose.
 
 ## The Raytracer
 All of my contributions for this raytracer can be found in the gfxraytrace.hpp file in this repository, and can be broken down as follows:
@@ -70,23 +72,23 @@ Intersection points occur when points on the raysatisfy the implicit equation wh
 
 where:
 
-    *t*, the intersection
+  *t*, the intersection
 
-      d, the view direction
-      
-      e, the origin
-      
-      c, the center of the sphere
-      
-      R, the radius of the sphere
+  d, the view direction
+
+  e, the origin
+
+  c, the center of the sphere
+
+  R, the radius of the sphere
 
 This solution can be simplified by calculating the discriminant (B^2 - 4AC) where: 
 
-    *A* = d^2 
+  *A* = d^2 
 
-    *B* = d * (e-c)
+  *B* = d * (e-c)
 
-    *C* = (e-c)^2 - R^2
+  *C* = (e-c)^2 - R^2
 
 
 Note that by calculating the discriminant we can find the following:
@@ -103,13 +105,13 @@ We use a barycentric coordinates approach and matrix algebra to solve a linear s
 
 where:
 
-      d, the view direction
+  d, the view direction
 
-      e, the origin
-      
-      a,b,c, the triangle vertices
-      
-      β, γ, *t*, unknowns we solve for to calculate intersection. 
+  e, the origin
+
+  a,b,c, the triangle vertices
+
+  β, γ, *t*, unknowns we solve for to calculate intersection. 
       
 The intersection is inside the triangle if and only if β>0, γ>0, and β+γ<1.
 
@@ -177,19 +179,19 @@ Follows the simple model for specular highlights that uses the Phong reflection 
 []
 where:
 
-        *L*, Pixel color
+  *L*, Pixel color
 
-       *kd*, diffuse coefficient (surface color)
-       
-       *I*, intensity of the light source
-       
-       n and l, unit vectors
-       
-       h, half vector
-       
-       p, Phong exponent that controls the apparent shininess of the surface
-       
-       *ks*, specular coefficient (specular color of the surface)
+   *kd*, diffuse coefficient (surface color)
+
+   *I*, intensity of the light source
+
+   n and l, unit vectors
+
+   h, half vector
+
+   p, Phong exponent that controls the apparent shininess of the surface
+
+   *ks*, specular coefficient (specular color of the surface)
        
 See blinn_phong_shader::shade() for c++ implementation.
 
