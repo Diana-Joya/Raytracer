@@ -13,6 +13,11 @@ This repository contains the implementation files of a minimalist raytracer buil
 
 **Some future work for this raytracer includes:** adding shadowing features, mirrored surfaces, other scene object shapes (besides triangles and spheres), and additional lighting features. 
 
+## Contents
+- [My Linear Algebra Contributions](#linear-algebra-contributions)
+- [The Raytracer](#the-raytracer)
+- [Results](#final-results)
+- [Usage](#usage)
 
 ## Linear Algebra Contributions
 This project builds on a previous linear algebra project I built in which I implemented vector and matrix algebra operations in C++. The following linear algebra contributions were all performed by me using skeleton code provided by Dr. Kevin Wortman. 
@@ -267,3 +272,4 @@ Some of my additional contributions include:
 ## Usage
 - Run `make` to raytrace the fast scenes (all except *teatime.png*)
 - Run `make all` to raytrace all the scenes (including *teatime.png*)
+- Run `make clean` to delete all raytraced scenes
